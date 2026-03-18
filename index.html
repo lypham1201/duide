@@ -2,9 +2,9 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Daily Quote</title>
+  <title>Daily Toxic Quote</title>
 
-  <!-- Google Font -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
   <style>
@@ -30,7 +30,7 @@
       backdrop-filter: blur(12px);
       padding: 40px;
       border-radius: 20px;
-      width: 400px;
+      width: 420px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
@@ -38,7 +38,6 @@
       font-size: 24px;
       margin-bottom: 20px;
       font-weight: 600;
-      letter-spacing: 1px;
     }
 
     #quote {
@@ -46,12 +45,16 @@
       font-size: 18px;
       line-height: 1.6;
       min-height: 80px;
-      opacity: 0;
-      transform: translateY(10px);
+      opacity: 1;
       transition: all 0.4s ease;
     }
 
-    #quote.show {
+    .fade {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .show {
       opacity: 1;
       transform: translateY(0);
     }
@@ -84,9 +87,10 @@
 <body>
 
   <div class="container">
-    <h1>💬 Quote of the Moment</h1>
+    <h1>💬 Toxic Wisdom</h1>
 
-    <div id="quote"></div>
+    <!-- Không hiện quote ban đầu -->
+    <div id="quote">Bấm nút để nhận chân lý 😏</div>
 
     <button onclick="showQuote()">Cho tôi câu khác 😤</button>
 
@@ -95,7 +99,7 @@
 
   <script>
     const quotes = [
-       "Bạn không lười đâu… bạn lười thật 😏",
+  "Bạn không lười đâu… bạn lười thật 😏",
   "Nhìn bạn cố gắng… tôi thấy tội 😆",
   "Đừng buồn… bạn quen rồi mà 😌",
   "Bạn không tệ… bạn ổn định ở mức tệ 😏",
@@ -189,6 +193,7 @@
 
     function showQuote() {
       let index;
+
       do {
         index = Math.floor(Math.random() * quotes.length);
       } while (index === lastIndex);
@@ -196,16 +201,15 @@
       lastIndex = index;
 
       const quoteEl = document.getElementById("quote");
-      quoteEl.classList.remove("show");
+
+      quoteEl.classList.add("fade");
 
       setTimeout(() => {
         quoteEl.innerText = quotes[index];
+        quoteEl.classList.remove("fade");
         quoteEl.classList.add("show");
       }, 200);
     }
-
-    // Load lần đầu
-    window.onload = showQuote;
   </script>
 
 </body>
