@@ -2,51 +2,100 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Câu nói hôm nay</title>
+  <title>Daily Quote</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    button {
-      padding: 12px 24px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      background-color: #ff7a18;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
       color: white;
-      cursor: pointer;
     }
 
-    button:hover {
-      background-color: #ff5500;
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      padding: 40px;
+      border-radius: 20px;
+      width: 400px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
     }
 
     #quote {
-      margin-top: 30px;
-      font-size: 22px;
-      max-width: 500px;
-      text-align: center;
-      color: #333;
-      font-weight: bold;
+      margin: 30px 0;
+      font-size: 18px;
+      line-height: 1.6;
+      min-height: 80px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+    }
+
+    #quote.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    button {
+      padding: 12px 28px;
+      border-radius: 999px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff7a18, #ffb347);
+      color: white;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(255, 150, 0, 0.4);
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: 0.6;
     }
   </style>
 </head>
+
 <body>
 
-  <button onclick="showQuote()">Xem chân lý</button>
-  <div id="quote"></div>
+  <div class="container">
+    <h1>💬 Quote of the Moment</h1>
+
+    <div id="quote"></div>
+
+    <button onclick="showQuote()">Cho tôi câu khác 😤</button>
+
+    <footer>Chỉ mang tính giải trí 🤡</footer>
+  </div>
 
   <script>
     const quotes = [
-"Bạn không lười đâu… bạn lười thật 😏",
+       "Bạn không lười đâu… bạn lười thật 😏",
   "Nhìn bạn cố gắng… tôi thấy tội 😆",
   "Đừng buồn… bạn quen rồi mà 😌",
   "Bạn không tệ… bạn ổn định ở mức tệ 😏",
@@ -136,12 +185,26 @@
   "Bạn không cần thay đổi… người khác cần bạn biến mất 😆"
     ];
 
+    let lastIndex = -1;
+
     function showQuote() {
-      const index = Math.floor(Math.random() * quotes.length);
-      document.getElementById("quote").innerText = quotes[index];
+      let index;
+      do {
+        index = Math.floor(Math.random() * quotes.length);
+      } while (index === lastIndex);
+
+      lastIndex = index;
+
+      const quoteEl = document.getElementById("quote");
+      quoteEl.classList.remove("show");
+
+      setTimeout(() => {
+        quoteEl.innerText = quotes[index];
+        quoteEl.classList.add("show");
+      }, 200);
     }
 
-    // Tự động hiện khi load trang
+    // Load lần đầu
     window.onload = showQuote;
   </script>
 
