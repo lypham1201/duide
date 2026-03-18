@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Câu nói hôm nay</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff7a18;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff5500;
+    }
+
+    #quote {
+      margin-top: 30px;
+      font-size: 22px;
+      max-width: 500px;
+      text-align: center;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="showQuote()">Xem chân lý</button>
+  <div id="quote"></div>
+
+  <script>
+    const quotes = [
+"Bạn không lười đâu… bạn lười thật 😏",
+  "Nhìn bạn cố gắng… tôi thấy tội 😆",
+  "Đừng buồn… bạn quen rồi mà 😌",
+  "Bạn không tệ… bạn ổn định ở mức tệ 😏",
+  "Cố lên, bạn sắp thất bại rồi 😆",
+  "Người ta cố gắng để thành công… bạn cố gắng để làm gì vậy? 😏",
+  "Bạn không vô dụng… bạn dùng để làm ví dụ 😆",
+  "Sống như bạn… chắc cũng mệt 😌",
+  "Đừng so sánh với người khác… đau lắm 😏",
+  "Bạn không ngu… bạn ngu bền vững 😆",
+  "Thất bại không đáng sợ… bạn mới đáng sợ 😏",
+  "Bạn không cần nghỉ… vì bạn chưa làm gì 😆",
+  "Nhìn bạn là thấy tương lai mù mịt 😏",
+  "Bạn không sai… bạn sai từ khi bắt đầu 😆",
+  "Cố lên… người khác còn tệ hơn… à mà thôi 😏",
+  "Bạn không cần cố… vì ai cũng biết kết quả 😆",
+  "Bạn không yếu… bạn yếu đều 😏",
+  "Bạn không lạc đường… bạn không có đường 😆",
+  "Bạn không chậm… bạn đứng luôn 😏",
+  "Bạn không kém… bạn kém rõ ràng 😆",
+  "Đừng lo… không ai kỳ vọng vào bạn đâu 😏",
+  "Bạn không dở… bạn dở đều các mặt 😆",
+  "Bạn không fail… bạn flop từ đầu 😏",
+  "Bạn không vô hình… bạn bị bỏ qua 😆",
+  "Bạn không thiếu động lực… bạn thiếu lý do để sống 😏",
+  "Bạn không xui… bạn đen từ trong ra 😆",
+  "Bạn không cần sửa… xóa luôn cho nhanh 😏",
+  "Bạn không nhạt… bạn vô vị hoàn toàn 😆",
+  "Bạn không tệ nhất… nhưng bạn đang cố 😏",
+  "Bạn không chán… bạn vô nghĩa 😆",
+  "Bạn không bị bỏ rơi… bạn bị né 😏",
+  "Bạn không yếu tâm lý… bạn không có 😆",
+  "Bạn không kém duyên… bạn hết duyên 😏",
+  "Bạn không ngu đâu… bạn ngu thật 😆",
+  "Bạn không cần cố… vì cũng chẳng tới đâu 😏",
+  "Bạn không tệ… bạn tệ hơn tưởng tượng 😆",
+  "Bạn không cần học… vì học cũng vậy 😏",
+  "Bạn không thiếu tiền… bạn thiếu tất cả 😆",
+  "Bạn không buồn… bạn trống rỗng 😏",
+  "Bạn không khác biệt… bạn lệch hẳn 😆",
+  "Bạn không sai lầm… bạn là sai lầm 😏",
+  "Bạn không mệt… bạn lười 😆",
+  "Bạn không yếu đuối… bạn yếu thật 😏",
+  "Bạn không đáng ghét… bạn đáng thương 😆",
+  "Bạn không cần giải thích… ai cũng hiểu 😏",
+  "Bạn không kém nổi bật… bạn chìm nghỉm 😆",
+  "Bạn không thiếu cơ hội… bạn bỏ hết 😏",
+  "Bạn không xấu… bạn khó cứu 😆",
+  "Bạn không cần thay đổi… muộn rồi 😏",
+  "Bạn không kém may… bạn hết may 😆",
+  "Bạn không có tương lai… bạn có quá khứ 😏",
+  "Bạn không yếu… bạn mỏng manh kiểu vô dụng 😆",
+  "Bạn không tệ… bạn quen tệ rồi 😏",
+  "Bạn không cần nhanh… bạn không tới 😆",
+  "Bạn không có giá trị… bạn có mặt 😏",
+  "Bạn không ổn… bạn ổn định ở mức tệ 😆",
+  "Bạn không khác… bạn giống thất bại 😏",
+  "Bạn không cần lo… vì cũng không khá hơn 😆",
+  "Bạn không thiếu nghị lực… bạn thiếu ý chí 😏",
+  "Bạn không dốt… bạn dốt đều 😆",
+  "Bạn không cần nghỉ… vì bạn chưa bắt đầu 😏",
+  "Bạn không chậm tiến… bạn đứng luôn 😆",
+  "Bạn không xấu tính… bạn khó ưa 😏",
+  "Bạn không lạc lõng… bạn bị bỏ lại 😆",
+  "Bạn không cần ai… vì không ai cần bạn 😏",
+  "Bạn không tệ với người khác… bạn tệ với chính mình 😆",
+  "Bạn không vô tri… bạn vô dụng 😏",
+  "Bạn không khác biệt… bạn lỗi 😆",
+  "Bạn không yếu… bạn hết cứu 😏",
+  "Bạn không có mục tiêu… bạn có ngủ 😆",
+  "Bạn không thiếu gì… bạn thiếu não 😏",
+  "Bạn không fail… bạn fail đẹp 😆",
+  "Bạn không ổn đâu… bạn quen rồi 😏",
+  "Bạn không cần cố nữa… nhìn mệt 😆",
+  "Bạn không thua… bạn thua đậm 😏",
+  "Bạn không chậm… bạn dừng 😆",
+  "Bạn không kém… bạn hết hy vọng 😏",
+  "Bạn không cần sống nhanh… bạn cũng không đi đâu 😆",
+  "Bạn không buồn đâu… bạn trơ rồi 😏",
+  "Bạn không xui… bạn đen bền vững 😆",
+  "Bạn không yếu… bạn yếu đều 😏",
+  "Bạn không sai… bạn sai toàn tập 😆",
+  "Bạn không cần nghĩ… vì cũng không ra 😏",
+  "Bạn không khác người… bạn khác thường 😆",
+  "Bạn không thiếu gì… bạn thiếu hết 😏",
+  "Bạn không cần cải thiện… bạn cần reset 😆",
+  "Bạn không dở… bạn dở đều tay 😏",
+  "Bạn không cần thay đổi… người khác cần bạn biến mất 😆"
+    ];
+
+    function showQuote() {
+      const index = Math.floor(Math.random() * quotes.length);
+      document.getElementById("quote").innerText = quotes[index];
+    }
+
+    // Tự động hiện khi load trang
+    window.onload = showQuote;
+  </script>
+
+</body>
+</html>
