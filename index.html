@@ -2,7 +2,10 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Daily Toxic Quote</title>
+  <title>Chân lý cuộc đời</title>
+
+  <!-- Mobile responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
@@ -22,53 +25,53 @@
       align-items: center;
       background: linear-gradient(135deg, #1f1c2c, #928dab);
       color: white;
+      padding: 20px;
     }
 
     .container {
       text-align: center;
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(12px);
-      padding: 40px;
+      padding: 30px 20px;
       border-radius: 20px;
-      width: 420px;
+      width: 100%;
+      max-width: 500px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
     h1 {
-      font-size: 24px;
+      font-size: 26px;
       margin-bottom: 20px;
+    }
+
+    #content {
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    #content img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    #text {
+      font-size: clamp(20px, 5vw, 28px);
       font-weight: 600;
-    }
-
-    #quote {
-      margin: 30px 0;
-      font-size: 18px;
       line-height: 1.6;
-      min-height: 80px;
-      opacity: 1;
-      transition: all 0.4s ease;
-    }
-
-    .fade {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    .show {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     button {
-      padding: 12px 28px;
+      margin-top: 20px;
+      padding: 14px 32px;
       border-radius: 999px;
       border: none;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       background: linear-gradient(135deg, #ff7a18, #ffb347);
       color: white;
-      font-weight: 500;
-      transition: all 0.3s ease;
+      transition: 0.3s;
     }
 
     button:hover {
@@ -76,8 +79,19 @@
       box-shadow: 0 5px 20px rgba(255, 150, 0, 0.4);
     }
 
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     footer {
-      margin-top: 20px;
+      margin-top: 15px;
       font-size: 12px;
       opacity: 0.6;
     }
@@ -87,128 +101,26 @@
 <body>
 
   <div class="container">
-    <h1>💬 Toxic Wisdom</h1>
+    <h1>💬 Quà tặng cuộc sống</h1>
 
-    <!-- Không hiện quote ban đầu -->
-    <div id="quote">Bấm nút để nhận chân lý 😏</div>
+    <button onclick="showContent()">Xem quà nào 😏</button>
 
-    <button onclick="showQuote()">Cho tôi câu khác 😤</button>
+    <div id="content">
+      <!-- Ảnh -->
+      <img src="manh.jpg" alt="random image">
+
+      <!-- Text -->
+      <div id="text">
+        Đẹp trai thì mới có nhiều đứa yêu 😎
+      </div>
+    </div>
 
     <footer>Chỉ mang tính giải trí 🤡</footer>
   </div>
 
   <script>
-    const quotes = [
-  "Bạn không lười đâu… bạn lười thật 😏",
-  "Nhìn bạn cố gắng… tôi thấy tội 😆",
-  "Đừng buồn… bạn quen rồi mà 😌",
-  "Bạn không tệ… bạn ổn định ở mức tệ 😏",
-  "Cố lên, bạn sắp thất bại rồi 😆",
-  "Người ta cố gắng để thành công… bạn cố gắng để làm gì vậy? 😏",
-  "Bạn không vô dụng… bạn dùng để làm ví dụ 😆",
-  "Sống như bạn… chắc cũng mệt 😌",
-  "Đừng so sánh với người khác… đau lắm 😏",
-  "Bạn không ngu… bạn ngu bền vững 😆",
-  "Thất bại không đáng sợ… bạn mới đáng sợ 😏",
-  "Bạn không cần nghỉ… vì bạn chưa làm gì 😆",
-  "Nhìn bạn là thấy tương lai mù mịt 😏",
-  "Bạn không sai… bạn sai từ khi bắt đầu 😆",
-  "Cố lên… người khác còn tệ hơn… à mà thôi 😏",
-  "Bạn không cần cố… vì ai cũng biết kết quả 😆",
-  "Bạn không yếu… bạn yếu đều 😏",
-  "Bạn không lạc đường… bạn không có đường 😆",
-  "Bạn không chậm… bạn đứng luôn 😏",
-  "Bạn không kém… bạn kém rõ ràng 😆",
-  "Đừng lo… không ai kỳ vọng vào bạn đâu 😏",
-  "Bạn không dở… bạn dở đều các mặt 😆",
-  "Bạn không fail… bạn flop từ đầu 😏",
-  "Bạn không vô hình… bạn bị bỏ qua 😆",
-  "Bạn không thiếu động lực… bạn thiếu lý do để sống 😏",
-  "Bạn không xui… bạn đen từ trong ra 😆",
-  "Bạn không cần sửa… xóa luôn cho nhanh 😏",
-  "Bạn không nhạt… bạn vô vị hoàn toàn 😆",
-  "Bạn không tệ nhất… nhưng bạn đang cố 😏",
-  "Bạn không chán… bạn vô nghĩa 😆",
-  "Bạn không bị bỏ rơi… bạn bị né 😏",
-  "Bạn không yếu tâm lý… bạn không có 😆",
-  "Bạn không kém duyên… bạn hết duyên 😏",
-  "Bạn không ngu đâu… bạn ngu thật 😆",
-  "Bạn không cần cố… vì cũng chẳng tới đâu 😏",
-  "Bạn không tệ… bạn tệ hơn tưởng tượng 😆",
-  "Bạn không cần học… vì học cũng vậy 😏",
-  "Bạn không thiếu tiền… bạn thiếu tất cả 😆",
-  "Bạn không buồn… bạn trống rỗng 😏",
-  "Bạn không khác biệt… bạn lệch hẳn 😆",
-  "Bạn không sai lầm… bạn là sai lầm 😏",
-  "Bạn không mệt… bạn lười 😆",
-  "Bạn không yếu đuối… bạn yếu thật 😏",
-  "Bạn không đáng ghét… bạn đáng thương 😆",
-  "Bạn không cần giải thích… ai cũng hiểu 😏",
-  "Bạn không kém nổi bật… bạn chìm nghỉm 😆",
-  "Bạn không thiếu cơ hội… bạn bỏ hết 😏",
-  "Bạn không xấu… bạn khó cứu 😆",
-  "Bạn không cần thay đổi… muộn rồi 😏",
-  "Bạn không kém may… bạn hết may 😆",
-  "Bạn không có tương lai… bạn có quá khứ 😏",
-  "Bạn không yếu… bạn mỏng manh kiểu vô dụng 😆",
-  "Bạn không tệ… bạn quen tệ rồi 😏",
-  "Bạn không cần nhanh… bạn không tới 😆",
-  "Bạn không có giá trị… bạn có mặt 😏",
-  "Bạn không ổn… bạn ổn định ở mức tệ 😆",
-  "Bạn không khác… bạn giống thất bại 😏",
-  "Bạn không cần lo… vì cũng không khá hơn 😆",
-  "Bạn không thiếu nghị lực… bạn thiếu ý chí 😏",
-  "Bạn không dốt… bạn dốt đều 😆",
-  "Bạn không cần nghỉ… vì bạn chưa bắt đầu 😏",
-  "Bạn không chậm tiến… bạn đứng luôn 😆",
-  "Bạn không xấu tính… bạn khó ưa 😏",
-  "Bạn không lạc lõng… bạn bị bỏ lại 😆",
-  "Bạn không cần ai… vì không ai cần bạn 😏",
-  "Bạn không tệ với người khác… bạn tệ với chính mình 😆",
-  "Bạn không vô tri… bạn vô dụng 😏",
-  "Bạn không khác biệt… bạn lỗi 😆",
-  "Bạn không yếu… bạn hết cứu 😏",
-  "Bạn không có mục tiêu… bạn có ngủ 😆",
-  "Bạn không thiếu gì… bạn thiếu não 😏",
-  "Bạn không fail… bạn fail đẹp 😆",
-  "Bạn không ổn đâu… bạn quen rồi 😏",
-  "Bạn không cần cố nữa… nhìn mệt 😆",
-  "Bạn không thua… bạn thua đậm 😏",
-  "Bạn không chậm… bạn dừng 😆",
-  "Bạn không kém… bạn hết hy vọng 😏",
-  "Bạn không cần sống nhanh… bạn cũng không đi đâu 😆",
-  "Bạn không buồn đâu… bạn trơ rồi 😏",
-  "Bạn không xui… bạn đen bền vững 😆",
-  "Bạn không yếu… bạn yếu đều 😏",
-  "Bạn không sai… bạn sai toàn tập 😆",
-  "Bạn không cần nghĩ… vì cũng không ra 😏",
-  "Bạn không khác người… bạn khác thường 😆",
-  "Bạn không thiếu gì… bạn thiếu hết 😏",
-  "Bạn không cần cải thiện… bạn cần reset 😆",
-  "Bạn không dở… bạn dở đều tay 😏",
-  "Bạn không cần thay đổi… người khác cần bạn biến mất 😆"
-    ];
-
-    let lastIndex = -1;
-
-    function showQuote() {
-      let index;
-
-      do {
-        index = Math.floor(Math.random() * quotes.length);
-      } while (index === lastIndex);
-
-      lastIndex = index;
-
-      const quoteEl = document.getElementById("quote");
-
-      quoteEl.classList.add("fade");
-
-      setTimeout(() => {
-        quoteEl.innerText = quotes[index];
-        quoteEl.classList.remove("fade");
-        quoteEl.classList.add("show");
-      }, 200);
+    function showContent() {
+      document.getElementById("content").style.display = "block";
     }
   </script>
 
