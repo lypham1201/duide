@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Chân lý cuộc đời</title>
 
-  <!-- Mobile responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Font -->
@@ -47,19 +46,36 @@
     #content {
       margin-top: 20px;
       display: none;
-      animation: fadeIn 0.5s ease;
+      animation: fadeIn 0.6s ease;
     }
 
+    /* ẢNH */
     #content img {
       width: 100%;
+      height: auto;
       border-radius: 15px;
       margin-bottom: 20px;
+      object-fit: cover;
+
+      /* hiệu ứng */
+      opacity: 0;
+      transform: scale(0.85);
+      animation: zoomFade 0.6s ease forwards;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      transition: 0.3s;
     }
 
+    /* hover */
+    #content img:hover {
+      transform: scale(1.05);
+    }
+
+    /* TEXT */
     #text {
-      font-size: clamp(20px, 5vw, 28px);
-      font-weight: 600;
+      font-size: clamp(22px, 6vw, 32px);
+      font-weight: 700;
       line-height: 1.6;
+      text-align: center;
     }
 
     button {
@@ -90,6 +106,13 @@
       }
     }
 
+    @keyframes zoomFade {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     footer {
       margin-top: 15px;
       font-size: 12px;
@@ -101,15 +124,13 @@
 <body>
 
   <div class="container">
-    <h1>💬 Quà tặng cuộc sống</h1>
+    <h1>💬 Mỗi ngày một niềm vui</h1>
 
     <button onclick="showContent()">Xem quà nào 😏</button>
 
     <div id="content">
-      <!-- Ảnh -->
-      <img src="manh.png" alt="random image">
+      <img src="manh.png" alt="ảnh đẹp trai">
 
-      <!-- Text -->
       <div id="text">
         Đẹp trai thì mới có nhiều đứa yêu 😎
       </div>
@@ -121,6 +142,7 @@
   <script>
     function showContent() {
       document.getElementById("content").style.display = "block";
+      document.querySelector("button").style.display = "none";
     }
   </script>
 
